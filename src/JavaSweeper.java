@@ -15,9 +15,9 @@ public class JavaSweeper extends JFrame {
     private JPanel panel;
     private JLabel label;
 
-    private final int COLS = 9;
-    private final int ROWS = 9;
-    private final int BOMBS = 10;
+    private final int COLS = 15;
+    private final int ROWS = 15;
+    private final int BOMBS = 25;
     private final int IMAGE_SIZE = 50;
 
     public static void main(String[] args) {

@@ -70,7 +70,7 @@ public class Game {
 
     private void setOpenedToClosedBoxesAroundNumber(Coord coord) {
         if(bomb.get(coord) != Box.BOMB) {
-            if(getCountFlagedBoxesEqualsBombedBoxes(coord) == bomb.get(coord).getNumber()) {
+            if(flag.getCountFlagedBoxesAroundNumber(coord) == bomb.get(coord).getNumber()) {
                 for (Coord around : Ranges.getCoordAround(coord)) {
                     if(flag.get(around) == Box.CLOSED) {
                         openBox(around);
@@ -79,16 +79,6 @@ public class Game {
             }
         }
 
-    }
-
-    private int getCountFlagedBoxesEqualsBombedBoxes(Coord coord) {
-        int count = 0;
-        for(Coord around : Ranges.getCoordAround(coord)) {
-            if(bomb.get(around) == Box.BOMB && flag.get(around) == Box.FLAGED) {
-                count++;
-            }
-        }
-        return count;
     }
 
     private void openBombs(Coord bombed) {
