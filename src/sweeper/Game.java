@@ -1,5 +1,7 @@
 package sweeper;
 
+import javax.swing.*;
+
 public class Game {
 
     private Bomb bomb;
@@ -38,8 +40,23 @@ public class Game {
     }
 
     private boolean gameOver() {
-        if(state == GameState.PLAYED) {
-            return false;
+        switch(state) {
+            case PLAYED:
+                return false;
+            case BOMBED:
+                JOptionPane.showMessageDialog(null,
+                                        "<html><h3>YOU LOSE!</h3></html>",
+                                            "Bombed",
+                                                JOptionPane.INFORMATION_MESSAGE,
+                                                new ImageIcon(getClass().getResource("/img/littleIcon.png")));
+                break;
+            case WINNER:
+                JOptionPane.showMessageDialog(null,
+                                            "<html><h3>CONGRATULATIONS!</h3></html>",
+                                                "Winner",
+                                            JOptionPane.INFORMATION_MESSAGE,
+                                             new ImageIcon(getClass().getResource("/img/littleIcon.png")));
+                break;
         }
         start();
         return true;

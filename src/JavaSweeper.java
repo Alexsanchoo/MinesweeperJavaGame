@@ -15,13 +15,13 @@ public class JavaSweeper extends JFrame {
     private JPanel panel;
     private JLabel label;
 
-    private final int COLS = 15;
-    private final int ROWS = 15;
-    private final int BOMBS = 25;
+    private final int COLS = 9;
+    private final int ROWS = 9;
+    private final int BOMBS = 10;
     private final int IMAGE_SIZE = 50;
 
     public static void main(String[] args) {
-            new JavaSweeper();
+        new JavaSweeper();
     }
 
     private JavaSweeper() {
@@ -36,8 +36,8 @@ public class JavaSweeper extends JFrame {
     private void initLabel() {
         label = new JLabel("Welcome!");
         add(label, BorderLayout.SOUTH);
-
     }
+
 
     private void initPanel() {
         panel = new JPanel() {
@@ -89,7 +89,7 @@ public class JavaSweeper extends JFrame {
         switch(game.getState()) {
             case PLAYED: return "Think, MORE THINK!";
             case BOMBED: return "YOU LOSE!";
-            case WINNER: return "CONGRATULATIONS!";
+                case WINNER: return "CONGRATULATIONS!";
             default: return "Welcome!";
         }
     }
