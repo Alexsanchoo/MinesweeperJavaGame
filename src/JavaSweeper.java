@@ -14,23 +14,80 @@ public class JavaSweeper extends JFrame {
 
     private JPanel panel;
     private JLabel label;
+    private JMenuBar menuBar;
 
-    private final int COLS = 9;
-    private final int ROWS = 9;
-    private final int BOMBS = 10;
+    private int COLS = 9;
+    private int ROWS = 9;
+    private int BOMBS = 10;
     private final int IMAGE_SIZE = 50;
+    private final String[][] menuGameItems = { {"Game", ""},
+                                            {"New", "F2"},
+                                            {"Beginner", ""},
+                                            {"Intermediate", ""},
+                                            {"Expert", ""},
+                                            {"Exit", ""}};
 
     public static void main(String[] args) {
-        new JavaSweeper();
+        new JavaSweeper(9,9,10);
     }
 
-    private JavaSweeper() {
+    private JavaSweeper(int cols, int rows, int bombs) {
+        COLS = cols;
+        ROWS = rows;
+        BOMBS = bombs;
         game = new Game(COLS, ROWS, BOMBS);
         game.start();
         setImages();
         initLabel();
         initPanel();
+        initMenuBar();
         initFrame();
+    }
+
+    private void initMenuBar() {
+        menuBar = new JMenuBar();
+        JMenu menu = createGameMenu();
+        menuBar.add(menu);
+        add(menuBar, BorderLayout.NORTH);
+
+        //New F2
+        menu.getItem(0).addActionListener(event -> {
+            game.start();
+            panel.repaint();
+        });
+
+        //Beginner
+        menu.getItem(1).addActionListener(event -> {
+            dispose();
+            new JavaSweeper(9,9,10);
+        });
+
+        //Intermediate
+        menu.getItem(2).addActionListener(event -> {
+            dispose();
+            new JavaSweeper(16,16,40);
+        });
+
+        //Expert
+        menu.getItem(3).addActionListener(event -> {
+            dispose();
+            new JavaSweeper(30,16,99);
+        });
+
+        //Exit
+        menu.getItem(4).addActionListener(event -> {
+            dispose();
+        });
+    }
+
+    private JMenu createGameMenu() {
+        JMenu menu = new JMenu(menuGameItems[0][0]);
+        for(int i = 1; i < menuGameItems.length; i++) {
+            JMenuItem item = new JMenuItem(menuGameItems[i][0]);
+            item.setAccelerator(KeyStroke.getKeyStroke(menuGameItems[i][1]));
+            menu.add(item);
+        }
+        return menu;
     }
 
     private void initLabel() {
